@@ -9,6 +9,7 @@ import { MovieService } from '../movie.service';
 })
 export class DashboardComponent {
   movies: Movie[] = [];
+  movieLength!: number;
 
 
   constructor(private movieService:MovieService) {}
@@ -17,6 +18,11 @@ this.getMovies();
 }
 
   getMovies(): void{
-    this.movieService.getMovies().subscribe(movies=>this.movies=movies.slice(0,5))
+    this.movieService.getMovies().subscribe(movies=> {
+      this.movies=movies.slice(0,4);
+      this.movieLength=movies.length;
+
+
+    })
   }
 }

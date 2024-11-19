@@ -1,17 +1,44 @@
-<movie-detail [movie]="selectedMovie"></movie-detail>
+
 
 <div class="card">
   <div class="card-header">{{title}}</div>
 
 
 <ul class="list-group list-group-flush">
-  <li *ngFor="let movie of movies" (click)="onSelect(movie)" class="list-group-item" [class.active]="movie===selectedMovie">
+  <li *ngFor="let movie of movies" routerLink="/detail/{{movie.id}}" class="list-group-item" >
     <span class="badge bg-primary"> {{movie.id}}</span> {{movie.name}}
-    <div class="d-flex justify-content-end"><button class="btn btn-outline-danger btn-sm"><i class="fa fa-times"></i>X</button></div>
+    <div class="d-flex justify-content-end"><button class="btn btn-outline-danger btn-sm" (click)="delete(movie.id)"><i class="fa fa-times"></i>X</button></div>
 
 
   </li>
 
 </ul>
 
+</div>
+
+
+<div class="card my-2">
+  <div class="card-header">
+    Add Movie
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="name"></label>
+      <input #name placeholder="Movie Name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="imageUrl"></label>
+      <input #imageUrl placeholder="Image Url" class="form-control" >
+    </div>
+
+    <div class="form-group">
+      <label for="description"></label>
+      <textarea #description placeholder="Description" class="form-control" rows="3"></textarea>
+    </div>
+
+
+
+    <button (click)="add(name.value,imageUrl.value,description.value); name.value=''; imageUrl.value=''; description.value='';" class="btn btn-primary btn-sm">Save</button>
+  </div>
 </div>
